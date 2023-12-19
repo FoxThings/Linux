@@ -1,0 +1,14 @@
+#!/bin/bash
+
+make clean
+make
+sudo rmmod journal.ko
+/usr/src/linux-headers-6.2.0-39-generic/scripts/sign-file sha256     ~/signing_key.priv     ~/signing_key.x509     ./journal.ko
+sudo insmod journal.ko
+log=$(sudo dmesg | grep journal | tail -n 1)
+last_word=$(echo "$log" | awk '{print $NF}')
+parsed_number=$(echo "$last_word" | tr -cd '[:digit:]')
+sudo rm /dev/journal
+sudo mknod /dev/journal c $parsed_number 0
+sudo chmod 777 /dev/journal
+

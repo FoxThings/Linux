@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "ADD Nikita Zvezdin 21 123456789 email@email" > /dev/journal
+echo "ADD Kot Meshok 21 16587 email@email" > /dev/journal
+echo "ADD Anton Lolik 895 16587 email@email" > /dev/journal
+echo "GET Zvezdin" > /dev/journal & cat /dev/journal
+echo "GET Lolik" > /dev/journal & cat /dev/journal
+echo "GET Meshok" > /dev/journal & cat /dev/journal
